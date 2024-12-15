@@ -36,7 +36,8 @@ Happy-New-Year-2025/
 Dự án này được tạo ra để mang lại niềm vui, không khí lễ hội Tết và trải nghiệm đếm ngược thú vị cho mọi người. Ngoài ra, đây còn là cơ hội để học hỏi và rèn luyện các kỹ năng lập trình web.
 
 ## 📸 Hình Ảnh Demo
-![Demo Countdown](https://via.placeholder.com/800x400?text=Demo+Happy+New+Year+2025)
+![image](https://github.com/user-attachments/assets/4bf1301b-5d77-4798-b2e5-378de4f6d34f)
+
 
 ## 💡 Góp Ý
 Nếu bạn có ý tưởng hoặc góp ý để cải thiện dự án, đừng ngần ngại tạo **issue** hoặc gửi **pull request** trên GitHub.
