@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to Lunar New Year 2025</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('../Media/Background1.png') no-repeat center center;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    .countdown {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 2em;
+    }
+    .countdown div {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    .countdown span {
+      display: block;
+      font-size: 0.5em;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown">
+    <h5>Đếm Ngược Tết Nguyên Đáng Ất Tỵ 2025</h5>
+    <div id="days">0 <span>Ngày</span></div>
+    <div id="hours">0 <span>Giờ</span></div>
+    <div id="minutes">0 <span>Phút</span></div>
+    <div id="seconds">0 <span>Giây</span></div>
+  </div>
+
+  <audio id="backgroundMusic" src="../Media/Tết Đông Đầy.mp3" autoplay loop></audio>
+
+  <script>
+    const lunarNewYearDate = new Date('January 29, 2025 00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = lunarNewYearDate - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = `${days} <span>Ngày</span>`;
+        document.getElementById('hours').innerHTML = `${hours} <span>Giờ</span>`;
+        document.getElementById('minutes').innerHTML = `${minutes} <span>Phút</span>`;
+        document.getElementById('seconds').innerHTML = `${seconds} <span>Giây</span>`;
+      } else {
+        clearInterval(interval);
+        document.querySelector('.countdown').innerHTML = '<h1>Chúc Mừng Năm Mới 2025!</h1>';
+      }
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

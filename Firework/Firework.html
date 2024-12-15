@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to New Year</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: black;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .countdown {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.5em;
+      width: 20%;
+    }
+
+    .countdown div {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .countdown span {
+      display: block;
+      font-size: 0.5em;
+    }
+
+    h5 {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 30%;
+      height: 100%;
+    }
+
+    .video-background {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-150px) rotate(360deg); /* Reduced distance */
+        opacity: 0;
+      }
+    }
+   
+    @keyframes explode {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5); /* Reduced scale */
+        opacity: 0;
+      }
+    }
+
+    .firework {
+      position: absolute;
+      width: 8px; /* Smaller size */
+      height: 8px;
+      border-radius: 50%;
+      animation: shoot 1s linear, explode 0.5s ease-out forwards;
+      pointer-events: none;
+      background-color: #fff; /* Default color */
+    }
+
+    .firework:nth-child(odd) {
+      background-color: rgba(255, 0, 0, 0.8); /* Randomize color */
+    }
+
+    .corner-image {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+    }
+
+    .corner-image.top-left {
+      width: 20%;
+      height: 40%;
+      top: 10px;
+      left: 10px;
+    }
+
+    .corner-image.top-right {
+      width: 20%;
+      height: 35%;
+      top: 0px;
+      right: 10px;
+    }
+
+    .corner-image.bottom-left {
+      width: 15%;
+      height: 30%;
+      bottom: 0px;
+      left: 20px;
+    }
+
+    .corner-image.bottom-right {
+      width: 15%;
+      height: 30%;
+      bottom: 0px;
+      right: 25px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Countdown to Gregorian New Year -->
+  <div class="countdown" id="gregorianCountdown">
+    <h5>Đếm Ngược Tết Dương Lịch 2025</h5>
+    <div id="gDays">0 <span>Ngày</span></div>
+    <div id="gHours">0 <span>Giờ</span></div>
+    <div id="gMinutes">0 <span>Phút</span></div>
+    <div id="gSeconds">0 <span>Giây</span></div>
+  </div>
+
+  <!-- Video in the center -->
+  <div class="video-container">
+    <video class="video-background" autoplay loop muted>
+      <source src="../Media/Firework1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Countdown to Lunar New Year -->
+  <div class="countdown" id="lunarCountdown">
+    <h5>Đếm Ngược Tết Nguyên Đán 2025</h5>
+    <div id="lDays">0 <span>Ngày</span></div>
+    <div id="lHours">0 <span>Giờ</span></div>
+    <div id="lMinutes">0 <span>Phút</span></div>
+    <div id="lSeconds">0 <span>Giây</span></div>
+  </div>
+
+  <audio id="backgroundMusic" src="../Media/TetBinhAn-HanaCamTien-6942603.mp3" autoplay loop></audio>
+
+  <!-- Corner Images -->
+  <img src="../Media/left.jpg" alt="Corner 1" class="corner-image top-left">
+  <img src="../Media/topright.png" alt="Corner 2" class="corner-image top-right">
+  <img src="../Media/bottonleft.png" alt="Corner 3" class="corner-image bottom-left">
+  <img src="../Media/bottonright.png" alt="Corner 4" class="corner-image bottom-right">
+
+  <script>
+    // Dates for countdowns
+    const gregorianNewYearDate = new Date('January 1, 2025 00:00:00').getTime();
+    const lunarNewYearDate = new Date('January 29, 2025 00:00:00').getTime();
+
+    // Update countdowns
+    function updateCountdown() {
+      const now = new Date().getTime();
+
+      // Gregorian New Year Countdown
+      const gDistance = gregorianNewYearDate - now;
+      updateTime(gDistance, 'gDays', 'gHours', 'gMinutes', 'gSeconds');
+
+      // Lunar New Year Countdown
+      const lDistance = lunarNewYearDate - now;
+      updateTime(lDistance, 'lDays', 'lHours', 'lMinutes', 'lSeconds');
+    }
+
+    function updateTime(distance, daysId, hoursId, minutesId, secondsId) {
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById(daysId).innerHTML = `${days} <span>Ngày</span>`;
+        document.getElementById(hoursId).innerHTML = `${hours} <span>Giờ</span>`;
+        document.getElementById(minutesId).innerHTML = `${minutes} <span>Phút</span>`;
+        document.getElementById(secondsId).innerHTML = `${seconds} <span>Giây</span>`;
+      }
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    // Firework effect
+    document.body.addEventListener('click', (event) => {
+      for (let i = 0; i < 30; i++) {
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = `${event.clientX}px`;
+        firework.style.top = `${event.clientY}px`;
+
+        // Smaller random spread direction
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 50 + 30;  /* Reduced distance */
+
+        firework.style.transform = `translate(-50%, -50%) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+
+        firework.style.animationDelay = `${i * 0.05}s`;
+        document.body.appendChild(firework);
+
+        setTimeout(() => {
+          firework.remove();
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html>

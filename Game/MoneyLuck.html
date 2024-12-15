@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bói Quẻ</title>
+  <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #fbf6c2;
+        position: relative;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      align-items: center;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .side {
+      width: 20%;
+      text-align: center;
+    }
+
+    .center {
+        margin-top: 150px;
+      width: 60%;
+      text-align: center;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .shake-image1,
+    .shake-image2,
+    .shake-image3,
+    .shake-image4 {
+      position: absolute;
+      width: 150px;
+      height: auto;
+    }
+
+    .shake-image1 {
+        width: 25%;
+        height: 50%;
+        top: -30px;
+        left: -30px;
+    }
+
+    .shake-image2 {
+        width: 25%;
+        height: 50%;
+        top: 0px;
+        right: 0px;
+    }
+
+    .shake-image3 {
+        width: 25%;
+        height: 40%;
+      bottom: 0px;
+      left: 10px;
+    }
+
+    .shake-image4 {
+        width: 20%;
+        height: 40%;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .top-mid-image {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 25%;
+      height: 40%;
+    }
+
+    @keyframes shake {
+        0% {
+          transform: rotate(0deg) translateX(0) translateY(0);
+        }
+        25% {
+          transform: rotate(-15deg) translateX(-20px) translateY(-10px); 
+        }
+        50% {
+          transform: rotate(15deg) translateX(20px) translateY(10px); 
+        }
+        75% {
+          transform: rotate(-15deg) translateX(-20px) translateY(-10px);
+        }
+        100% {
+          transform: rotate(0deg) translateX(0) translateY(0);
+        }
+      }
+      
+
+    .shake {
+      animation: shake 1s ease-in-out;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #c83a3a;
+    }
+
+    #prayerText {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .button-container {
+      margin: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #84ba55;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button.clicked {
+      background-color: #c83a3a; 
+      color: white;
+    }
+
+    .popup {
+        position: fixed;
+        top: 85%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white; 
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+        z-index: 100;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+        max-width: 80%; 
+        text-align: center;
+      }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="../Media/NgayXuanLongPhungSumVay-VA-2712302.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <img src="../Media/topmid.png" alt="Top Mid Image" class="top-mid-image" id="topMidImage">
+
+  <div class="container">
+    <div class="side">
+      <img src="../Media/trangtri1.png" alt="Image 1" class="shake-image1" id="image1">
+      <img src="../Media//trangtrai2.png" alt="Image 2" class="shake-image2" id="image2">
+    </div>
+
+    <div class="center">
+      <h2>Bạn xin quẻ gì?</h2>
+      <div class="button-container">
+        <button class="button" id="lovePrayerBtn">Tình Duyên</button>
+        <button class="button" id="healthPrayerBtn">Sức Khỏe</button>
+        <button class="button" id="wealthPrayerBtn">Tài Lộc</button>
+      </div>
+
+      <div id="prayerText"></div>
+      <div class="image-container" id="imageContainer" style="display: none;">
+        <img src="../Media/gieo-que.png" alt="Shake Me" class="shake-image" id="shakeImage">
+      </div>
+    </div>
+
+    <div class="side">
+      <img src="../Media/trangtri3.png" alt="Image 3" class="shake-image3" id="image3">
+      <img src="../Media/trangtri4.png" alt="Image 4" class="shake-image4" id="image4">
+    </div>
+  </div>
+
+  <div class="popup" id="popup"></div>
+
+  <script>
+    const lovePrayers = [
+        "Sắp có bồ rồi, không lo độc thân nữa!",
+        "Cầu cho anh ấy (cô ấy) không thể quên em!",
+        "Tình yêu đến như gió, đừng để mất như bóng tối!"
+        ];
+
+        const healthPrayers = [
+        "Cầu cho sức khỏe như bò, không ốm đau!",
+        "Không đi bệnh viện, chỉ đi shopping!",
+        "Cơ thể luôn khỏe mạnh, không sợ mệt mỏi!"
+        ];
+
+        const wealthPrayers = [
+        "Tài lộc đầy nhà, ví tiền như thùng phuy!",
+        "Làm ăn phát đạt, tiền đổ về như thác!",
+        "Mỗi ngày đều có deal hời!"
+        ];
+
+    let selectedPrayerType = '';
+
+    document.getElementById('lovePrayerBtn').addEventListener('click', function() {
+      selectedPrayerType = 'love';
+      showImageContainer();
+      changeButtonColor(this);
+    });
+
+    document.getElementById('healthPrayerBtn').addEventListener('click', function() {
+      selectedPrayerType = 'health';
+      showImageContainer();
+      changeButtonColor(this);
+    });
+
+    document.getElementById('wealthPrayerBtn').addEventListener('click', function() {
+      selectedPrayerType = 'wealth';
+      showImageContainer();
+      changeButtonColor(this);
+    });
+
+    function changeButtonColor(button) {
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach(btn => btn.classList.remove('clicked'))
+      button.classList.add('clicked');
+    }
+
+    function showImageContainer() {
+      document.getElementById('imageContainer').style.display = 'block';
+    }
+
+    document.getElementById('shakeImage').addEventListener('click', function() {
+      this.classList.add('shake');
+
+      this.addEventListener('animationend', function() {
+        this.classList.remove('shake');
+        let randomPrayer;
+        if (selectedPrayerType === 'love') {
+          randomPrayer = lovePrayers[Math.floor(Math.random() * lovePrayers.length)];
+        } else if (selectedPrayerType === 'health') {
+          randomPrayer = healthPrayers[Math.floor(Math.random() * healthPrayers.length)];
+        } else if (selectedPrayerType === 'wealth') {
+          randomPrayer = wealthPrayers[Math.floor(Math.random() * wealthPrayers.length)];
+        }
+
+        document.getElementById('popup').textContent = randomPrayer;
+        document.getElementById('popup').style.display = 'block';
+        
+        setTimeout(function() {
+          document.getElementById('popup').style.display = 'none';
+      }, 5000); 
+      });
+    });
+  </script>
+</body>
+</html>

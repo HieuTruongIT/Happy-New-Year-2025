@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year 2025</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #efb445;
+      color: black;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      background-color: #efb445;
+      color: #c72312;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px; 
+    }
+
+    nav ul li a {
+      color: #c72312;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-right img {
+      height: 40px; 
+      margin-left: 10px; 
+    }
+
+    main {
+      width: 100%;
+      height: 100vh;
+      margin-top: 0;
+      position: relative; 
+    }
+
+    /* Ẩn ảnh nền */
+    .background-image {
+      display: none;
+    }
+
+    /* Đặt các ảnh ở 4 góc dưới */
+    .corner-img {
+      position: absolute;
+      width: 100px; /* Kích thước ảnh có thể thay đổi */
+      height: 100px;
+      z-index: 1;
+    }
+
+    .top-left {
+      width: 25%;
+      height: 50%;
+      top: 50px; /* Vị trí ở góc trên bên trái */
+      left: -30px;
+    }
+
+    .top-right {
+      width: 20%;
+      height: 35%;
+      top: 80px; /* Vị trí ở góc trên bên phải */
+      right: 20px;
+    }
+
+    .bottom-left {
+      width: 20%;
+      height: 45%;
+      bottom: 20px; /* Vị trí ở góc dưới bên trái */
+      left: 20px;
+    }
+
+    .bottom-right {
+      width: 20%;
+      height: 45%;
+      bottom: 20px; /* Vị trí ở góc dưới bên phải */
+      right: 20px;
+    }
+    .bottom-mid {
+      position: absolute;
+      bottom: 140px; /* Vị trí ảnh cách đáy */
+      left: 50%; /* Đặt ở giữa màn hình theo chiều ngang */
+      transform: translateX(-50%); /* Căn chỉnh hoàn toàn ở giữa */
+      width: 30%; /* Kích thước ảnh */
+      height: auto; /* Để giữ nguyên tỉ lệ */
+      z-index: 1;
+    }
+    .home {
+      padding: 0px 5px;
+      border-bottom: solid 1px #c72312;
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h2>Năm Ất Tỵ</h2>
+    </div>
+    <nav>
+      <ul>
+        <li class="home"><a href="#home">Home</a></li>
+        <li><a href="../Firework/Firework.html">Pháo Hoa</a></li>
+        <li><a href="../CountDown/CountDown.html">Countdown</a></li>
+        <li><a href="../christ-mast/Noel.html">Giáng Sinh</a></li>
+        <li><a href="../Game/MoneyLuck.html">Lắc Lì Xì</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <h2>Happy New Year</h2>
+    </div>
+  </header>
+
+  <main>
+    <!-- Các ảnh ở 4 góc dưới header -->
+    <img src="../Media/bg2.png" alt="Corner 1" class="corner-img top-left">
+    <img src="../Media/bg1.png" alt="Corner 2" class="corner-img top-right">
+    <img src="../Media/bg3.png" alt="Corner 3" class="corner-img bottom-left">
+    <img src="../Media/bg4.png" alt="Corner 4" class="corner-img bottom-right">
+    <img src="../Media/bg5.png" alt="Corner 5" class="corner-img bottom-mid">
+  </main>
+
+</body>
+</html>
