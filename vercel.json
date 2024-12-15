@@ -2,14 +2,26 @@
   "version": 2,
   "builds": [
     {
-      "src": "BackGround/BackGround.html",
+      "src": "background/BackGround.html",
       "use": "@vercel/static"
     }
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/BackGround/BackGround.html"
+      "source": "/firework",
+      "destination": "/background/Firework.html"
+    },
+    {
+      "source": "/countdown",
+      "destination": "/background/CountDown.html"
+    },
+    {
+      "source": "/noel",
+      "destination": "/background/Noel.html"
+    },
+    {
+      "source": "/moneyluck",
+      "destination": "/background/MoneyLuck.html"
     }
   ]
 }
